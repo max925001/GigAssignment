@@ -2,7 +2,7 @@
 
 GiGFree is a modern, high-performance freelance marketplace built with the MERN stack. It features a premium, glassmorphic UI, real-time notifications via Socket.io, and industry-standard security using HttpOnly cookies.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://YOUR_VERCEL_FRONTEND_URL)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://gig-assignment-hbzk.vercel.app/)
 [![Demo Video](https://img.shields.io/badge/Demo-Video-red?style=for-the-badge)](https://YOUR_VIDEO_LINK)
 
 ---
