@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Home, Briefcase, PlusCircle, Bell, LogOut, User } from 'lucide-react';
+import { Home, Briefcase, PlusCircle, Bell, LogOut, User, LogIn, UserPlus } from 'lucide-react';
 import { logout } from '../features/authSlice';
 import NotificationCenter from './NotificationCenter';
 
@@ -17,9 +17,8 @@ const MobileNav = () => {
         navigate('/login');
     };
 
-    if (!user) return null;
-
     const getInitials = (name) => {
+        if (!name) return '?';
         return name
             .split(' ')
             .map((n) => n[0])
@@ -38,27 +37,43 @@ const MobileNav = () => {
                     <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Home</span>
                 </Link>
 
-                <Link to="/post-gig" className={`flex flex-col items-center space-y-1 transition-all ${isActive('/post-gig') ? 'text-blue-400' : 'text-slate-500'}`}>
-                    <PlusCircle className={`w-5 h-5 ${isActive('/post-gig') ? 'fill-blue-400/10' : ''}`} />
-                    <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Post</span>
-                </Link>
+                {user ? (
+                    <>
+                        <Link to="/post-gig" className={`flex flex-col items-center space-y-1 transition-all ${isActive('/post-gig') ? 'text-blue-400' : 'text-slate-500'}`}>
+                            <PlusCircle className={`w-5 h-5 ${isActive('/post-gig') ? 'fill-blue-400/10' : ''}`} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Post</span>
+                        </Link>
 
-                {/* Unified Notification Trigger for Mobile */}
-                <div className="relative">
-                    <NotificationCenter isMobile={true} />
-                </div>
+                        {/* Unified Notification Trigger for Mobile */}
+                        <div className="relative">
+                            <NotificationCenter isMobile={true} />
+                        </div>
 
-                <Link to="/dashboard" className={`flex flex-col items-center space-y-1 transition-all ${isActive('/dashboard') ? 'text-blue-400' : 'text-slate-500'}`}>
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-black text-white shadow-lg shadow-blue-500/20 ring-2 ring-white/10">
-                        {getInitials(user.name)}
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Me</span>
-                </Link>
+                        <Link to="/dashboard" className={`flex flex-col items-center space-y-1 transition-all ${isActive('/dashboard') ? 'text-blue-400' : 'text-slate-500'}`}>
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-black text-white shadow-lg shadow-blue-500/20 ring-2 ring-white/10">
+                                {getInitials(user.name)}
+                            </div>
+                            <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Me</span>
+                        </Link>
 
-                <button onClick={handleLogout} className="flex flex-col items-center space-y-1 text-slate-500 hover:text-red-400 transition-all">
-                    <LogOut className="w-5 h-5" />
-                    <span className="text-[10px] font-bold uppercase tracking-tighter">Exit</span>
-                </button>
+                        <button onClick={handleLogout} className="flex flex-col items-center space-y-1 text-slate-500 hover:text-red-400 transition-all">
+                            <LogOut className="w-5 h-5" />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter">Exit</span>
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login" className={`flex flex-col items-center space-y-1 transition-all ${isActive('/login') ? 'text-blue-400' : 'text-slate-500'}`}>
+                            <LogIn className={`w-5 h-5 ${isActive('/login') ? 'fill-blue-400/10' : ''}`} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Login</span>
+                        </Link>
+
+                        <Link to="/register" className={`flex flex-col items-center space-y-1 transition-all ${isActive('/register') ? 'text-blue-400' : 'text-slate-500'}`}>
+                            <UserPlus className={`w-5 h-5 ${isActive('/register') ? 'fill-blue-400/10' : ''}`} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter transition-all">Join</span>
+                        </Link>
+                    </>
+                )}
             </div>
         </div>
     );
