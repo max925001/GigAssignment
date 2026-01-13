@@ -49,7 +49,7 @@ Ensure you have **Node.js** and **npm** installed.
 
 ### 2. Clone the Project
 ```bash
-git clone https://github.com/YOUR_USERNAME/GiGFree.git
+git clone https://github.com/max925001/GigAssignment.git
 cd GiGFree
 ```
 
